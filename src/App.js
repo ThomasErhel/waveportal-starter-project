@@ -69,7 +69,7 @@ const App = () => {
                 /*
                  * Execute the actual wave from your smart contract
                  */
-                const waveTxn = await wavePortalContract.wave(message, { gasLimit: 300000 });
+                const waveTxn = await wavePortalContract.wave(message, { gasLimit: 500000 });
                 console.log("Mining...", waveTxn.hash);
                 await waveTxn.wait();
                 console.log("Mined -- ", waveTxn.hash);
@@ -143,7 +143,6 @@ const App = () => {
             }
         };
     }, []);
-
     return (
         <div className="mainContainer">
             <div className="dataContainer">
@@ -153,7 +152,13 @@ const App = () => {
                     I am Thomas and I build Web and mobile applications so that's pretty cool right? Connect your Ethereum wallet and wave at me!
                 </div>
 
-                <button className="waveButton" onClick={() => wave("Hello World")}>
+                {currentAccount && (
+                <div className="bio">
+                    <code>You are connected to {currentAccount}</code>
+                </div>
+                )}
+
+                <button className="waveButton" onClick={() => wave("I think anything is possible for those who dream, dare, work and never give up.")}>
                     Wave at Me
                 </button>
 
@@ -162,7 +167,6 @@ const App = () => {
                         Connect Wallet
                     </button>
                 )}
-
                 {allWaves.map((wave, index) => {
                     return (
                         <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
