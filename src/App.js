@@ -9,6 +9,7 @@ const App = () => {
     const [allWaves, setAllWaves] = useState([]);
     const [currentAccount, setCurrentAccount] = useState("");
     const contractAddress = "0xd417eFAC561B4D6F617F1A419D82BB68Eb49F993";
+    const [record, setRecord] = useState('');
 
     const checkIfWalletIsConnected = async () => {
         try {
@@ -153,12 +154,13 @@ const App = () => {
                 </div>
 
                 {currentAccount && (
-                <div className="bio">
-                    <code>You are connected to {currentAccount}</code>
-                </div>
+                <><div className="bio">
+                        <code>You are connected to {currentAccount}</code>
+                    </div><div className="bio">
+                            <input type="text" placeholder="Enter your message" onChange={(e) => setRecord(e.target.value)} />
+                        </div></>
                 )}
-
-                <button className="waveButton" onClick={() => wave("I think anything is possible for those who dream, dare, work and never give up.")}>
+                <button className="waveButton" onClick={() => wave(record)}>
                     Wave at Me
                 </button>
 
